@@ -71,13 +71,20 @@
     
         let username;
 
+
         fetch('CurrUser.txt')
             .then(response => response.text())
             .then(data => {
                 username = data.trim(); 
                 document.getElementById('name').textContent = username;
+
                 fetch('../users.json') 
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch users.json');
+                        }
+                        return response.json();
+                    })
                     .then(data => {
                         const user = data.find(u => u.username === username); 
                         if (user) {
