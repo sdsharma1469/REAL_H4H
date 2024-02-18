@@ -48,7 +48,5 @@ def print_products():
         products.append(product)
     return products
 
-
-
 def search_product():
     product_name = input("Enter the name of the product to remove: ")
