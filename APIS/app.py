@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
 
 
-from backend.functions import *
-from backend.readJson import print_products, count_products
+from functions import *
+from readJson import print_products, count_products
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
