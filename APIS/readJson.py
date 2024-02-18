@@ -15,28 +15,28 @@ def add_product():
         "contact": contact
     }
 
-    df = pd.read_json('backend/listings.json')
+    df = pd.read_json('listings.json')
 
     df = df.append(new_product, ignore_index=True)
 
-    df.to_json('backend/listings.json', orient='records')
+    df.to_json('listings.json', orient='records')
 
 def remove_product(inputeduuid):
-    df = pd.read_json('backend/listings.json')
+    df = pd.read_json('listings.json')
     if inputeduuid in df['id'].values:
         df = df[df['id'] != inputeduuid]
-        df.to_json('backend/listings.json', orient='records')
+        df.to_json('listings.json', orient='records')
 
 
 def count_products():
-    df = pd.read_json('backend/listings.json')
+    df = pd.read_json('listings.json')
     count = 0
     for index, row in df.iterrows():
         count+=1
     return(count)
 
 def print_products():
-    df = pd.read_json('backend/listings.json')
+    df = pd.read_json('listings.json')
     for index, row in df.iterrows():
         print(f"ID: {row['id']}")
         print(f"Product Name: {row['name']}")
