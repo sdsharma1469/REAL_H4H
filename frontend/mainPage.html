@@ -21,6 +21,9 @@
     <label for="productQuantity">Quantity (in kg):</label>
     <input type="number" id="productQuantity" name="productQuantity" required>
 
+    <label for="productContact">Contact:</label>
+    <input type="text" id="productContact" name="productContact" required>
+
     <button type="button" id="addProduct">Add Product</button>
   </form>
 </section>
@@ -37,49 +40,42 @@ document.getElementById('addProduct').addEventListener('click', function() {
   var productName = document.getElementById('productName').value;
   var productPrice = document.getElementById('productPrice').value;
   var productQuantity = document.getElementById('productQuantity').value;
+  var productContact = document.getElementById('productContact').value;
 
-  if (productName && productPrice && productQuantity) {
-    var productList = document.getElementById('productList');
-
-    var productDiv = document.createElement('div');
-    productDiv.className = 'product';
-
-    var productDetailsDiv = document.createElement('div');
-    productDetailsDiv.className = 'product-details';
-
-    var name = document.createElement('span');
-    name.textContent = productName + ' - ';
-
-    var price = document.createElement('span');
-    price.textContent = '₹' + productPrice + ' ';
-
-    var quantity = document.createElement('span');
-    quantity.textContent = productQuantity + 'kg';
-
-    var addButton = document.createElement('button');
-    addButton.textContent = 'Add to Cart';
-    addButton.onclick = function() {
-      alert('Added ' + productName + ' to cart.');
+  if (productName && productPrice && productQuantity && productContact) {
+    var data = {
+      productName: productName,
+      productPrice: productPrice,
+      productQuantity: productQuantity,
+      productContact: productContact
     };
 
-    productDetailsDiv.appendChild(name);
-    productDetailsDiv.appendChild(price);
-    productDetailsDiv.appendChild(quantity);
-    productDiv.appendChild(productDetailsDiv);
-    productDiv.appendChild(addButton);
+    fetch('/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log(data);
+      alert('Data sent successfully.');
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred.');
+    });
 
-    productList.appendChild(productDiv);
-
-    // Clear the input fields
     document.getElementById('productName').value = '';
     document.getElementById('productPrice').value = '';
     document.getElementById('productQuantity').value = '';
+    document.getElementById('productContact').value = '';
   } else {
     alert('Please fill out all fields.');
   }
 });
 </script>
-
 
 </body>
 </html>
