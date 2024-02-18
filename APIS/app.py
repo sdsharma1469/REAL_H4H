@@ -1,7 +1,4 @@
 from flask import Flask, jsonify, request
-
-
-from functions import *
 from readJson import print_products, count_products
 
 app = Flask(__name__)
