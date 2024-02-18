@@ -22,12 +22,13 @@ def print_data():
 def add():
     data = request.json
     productName = data.get('productName')
+    productFarmerName = data.get('productFarmerName')
     productPrice = data.get('productPrice')
     productQuantity = data.get('productQuantity')
     productContact = data.get('productContact')
     
     print(productQuantity)
-    add_product(productName, productPrice, productQuantity, productContact)
+    add_product(productName, productFarmerName, productPrice, productQuantity, productContact)
     return "Parameters received"
 
 

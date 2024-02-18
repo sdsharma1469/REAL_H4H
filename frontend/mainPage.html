@@ -24,6 +24,9 @@
     <label for="productContact">Contact:</label>
     <input type="text" id="productContact" name="productContact" required>
 
+    <label for="FarmerName">FarmerName:</label>
+    <input type="text" id="FarmerName" name="FarmerName" required>
+
     <button type="button" id="addProduct">Add Product</button>
   </form>
 </section>
@@ -61,6 +64,7 @@ window.onload = function() {
               <tr>
                   <td>
                       <p><strong>Product Name:</strong> ${item.name}</p>
+                      <p><strong>Contact:</strong> ${item.farmer}</p>
                       <p><strong>Price:</strong> ${item.price}</p>
                       <p><strong>Quantity:</strong> ${item.quantity}</p>
                       <p><strong>Contact:</strong> ${item.contact}</p>
@@ -84,8 +88,10 @@ document.getElementById('addProduct').addEventListener('click', function() {
     var productPrice = document.getElementById('productPrice').value;
     var productQuantity = document.getElementById('productQuantity').value;
     var productContact = document.getElementById('productContact').value;
+    var productFarmerName = document.getElementById('productFarmerName').value;
     var data = {
         productName: productName,
+        productFarmerName : productFarmerName,
         productPrice: productPrice,
         productQuantity: productQuantity,
         productContact: productContact
