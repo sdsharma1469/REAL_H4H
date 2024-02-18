@@ -1,7 +1,9 @@
 import pandas as pd
 
+df = pd.read_json('APIS/listings.json')
 
-def search_product():
-    product_name = input("Enter the name of the product to remove: ")
-    matching_products = df[df['name'] == product_name]
+def search_product(name):
+    matching_products = df[df['name'] == name]
     return matching_products
+
+
