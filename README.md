@@ -18,4 +18,5 @@ How We Built It
 For the front end we used a blend of HTML, JavaScript, and CSS to ensure a visually appealing and user-friendly interface. HTML provided the structural foundation of the web pages, while JavaScript added dynamic behavior and interactivity. CSS was employed for styling and layout design, enhancing the overall aesthetics of the platform. On the backend, Python served as the primary programming language, with the Flask framework facilitating the development of RESTful APIs for handling HTTP requests and managing user sessions. We utilized pandas for efficient data manipulation and SQLAlchemy for seamless interaction with the database, addressing complexities related to data management and ensuring smooth platform functionality.
 
 Challenges We Ran Into 
+
 A significant challenge we faced was managing the database efficiently. As the platform expanded, optimizing database performance and ensuring data security became paramount. Implementing password hashing posed a particular challenge, requiring the achievement of linear O(n) time complexity for accessing user records while safeguarding user credentials.
