@@ -11,7 +11,7 @@ Streak feature - When a customer selects fresh produce from our farmers, they st
 
 What's Next
 
-Moving forward, Farm Fast aims to expand its reach and impact by onboarding more farmers from different regions. We plan to enhance the platform with features such as real-time chat support, secure payment gateways, and customizable delivery options to provide a seamless user experience. Additionally, we aim to educate both farmers and consumers about the benefits of direct trade and sustainable farming practices through workshops, webinars, and community outreach programs.
+Moving forward, Farm Fast aims to expand its reach and impact by onboarding more farmers from different regions. We plan to enhance the platform with features such as real-time chat support, secure payment gateways, and customizable delivery options to provide a seamless user experience. Additionally, we aim to implement verification through linear regression machine learning models to ensure that only verified farmers can sell their produce. We also aim to educate both farmers and consumers about the benefits of direct trade and sustainable farming practices through workshops, webinars, and community outreach programs.
 
 How We Built It
 
