@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <link rel="stylesheet" href="mainPage.css">
+    <title>Login - Farm Fast</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .login-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: auto;
+        }
+        .login-container img {
+            height: 100px;
+        }
+        .login-container h1 {
+            font-size: 2rem;
+            color: #5b8c5a;
+            margin: 0;
+        }
+        .login-form {
+            margin-top: 1rem;
+        }
+        .login-form label,
+        .login-form input,
+        .login-form button {
+            display: block;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        .login-form input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-form button {
+            padding: 10px;
+            background-color: #5b8c5a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Add a little space between buttons */
+        }
+        .login-form button:hover {
+            background-color: #4a774c;
+        }
+        .create-account-btn {
+            background-color: #6c757d; /* A different color for the create account button */
+        }
+        .create-account-btn:hover {
+            background-color: #565e64;
+        }
+        
+    
+    </style>
+
+      <script>
+        function validatePassword() {
+    var password = document.getElementById("password").value;
+    var uppercaseLetters = /[A-Z]/g;
+    var numbers = /[0-9]/g;
+
+    if (password.length < 9 || !password.match(uppercaseLetters) || (password.match(numbers) || []).length < 2) {
+        alert("Password must have at least 9 characters, start with a capital letter, and contain at least 2 numbers.");
+        return false;
+    }
+    return true;
+}
+    </script>
+</head>
+<body>
+
+    <div class="login-container">
+        <img src="logo1.jpg" alt="Farm Fast Logo">
+        <h1>Farm Fast</h1>
+
+        <form class="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit"><a href = "mainPage.html">Login </a></button>
+            <button type="button" class="create-account-btn">Create Account</button>
+        </form>
+    </div>
+
+</body>
+</html>

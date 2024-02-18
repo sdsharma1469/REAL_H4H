@@ -21,6 +21,9 @@
     <label for="productQuantity">Quantity (in kg):</label>
     <input type="number" id="productQuantity" name="productQuantity" required>
 
+    <label for="productContact">Contact:</label>
+    <input type="text" id="productContact" name="productContact" required>
+
     <button type="button" id="addProduct">Add Product</button>
   </form>
 </section>
@@ -33,53 +36,74 @@
 </section>
 
 <script>
+
+window.onload = function() {
+  console.log("Page loaded");
+
+  fetch('http://127.0.0.1:5000/print')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); 
+  })
+  .then(data => {
+    console.log(data); 
+    alert('GET request successful.'); 
+
+    var productListDiv = document.getElementById('productList');
+    data.forEach(function(item) {
+      var productDiv = document.createElement('div');
+      productDiv.classList.add('product-item');
+      productDiv.innerHTML = `
+        <div class="product-box">
+          <p><strong>Product Name:</strong> ${item.name}</p>
+          <p><strong>Price:</strong> ${item.price}</p>
+          <p><strong>Quantity:</strong> ${item.quantity}</p>
+          <p><strong>Contact:</strong> ${item.contact}</p>
+        </div>
+      `;
+      productListDiv.appendChild(productDiv);
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred.');
+  });
+};
+
+
 document.getElementById('addProduct').addEventListener('click', function() {
-  var productName = document.getElementById('productName').value;
-  var productPrice = document.getElementById('productPrice').value;
-  var productQuantity = document.getElementById('productQuantity').value;
-
-  if (productName && productPrice && productQuantity) {
-    var productList = document.getElementById('productList');
-
-    var productDiv = document.createElement('div');
-    productDiv.className = 'product';
-
-    var productDetailsDiv = document.createElement('div');
-    productDetailsDiv.className = 'product-details';
-
-    var name = document.createElement('span');
-    name.textContent = productName + ' - ';
-
-    var price = document.createElement('span');
-    price.textContent = '₹' + productPrice + ' ';
-
-    var quantity = document.createElement('span');
-    quantity.textContent = productQuantity + 'kg';
-
-    var addButton = document.createElement('button');
-    addButton.textContent = 'Add to Cart';
-    addButton.onclick = function() {
-      alert('Added ' + productName + ' to cart.');
+    var productName = document.getElementById('productName').value;
+    var productPrice = document.getElementById('productPrice').value;
+    var productQuantity = document.getElementById('productQuantity').value;
+    var productContact = document.getElementById('productContact').value;
+    var data = {
+        productName: productName,
+        productPrice: productPrice,
+        productQuantity: productQuantity,
+        productContact: productContact
     };
 
-    productDetailsDiv.appendChild(name);
-    productDetailsDiv.appendChild(price);
-    productDetailsDiv.appendChild(quantity);
-    productDiv.appendChild(productDetailsDiv);
-    productDiv.appendChild(addButton);
-
-    productList.appendChild(productDiv);
-
-    // Clear the input fields
-    document.getElementById('productName').value = '';
-    document.getElementById('productPrice').value = '';
-    document.getElementById('productQuantity').value = '';
-  } else {
-    alert('Please fill out all fields.');
-  }
+    fetch('http://127.0.0.1:5000/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        alert('POST request sent successfully.');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred.');
+    });
 });
-</script>
 
+</script>
 
 </body>
 </html>
