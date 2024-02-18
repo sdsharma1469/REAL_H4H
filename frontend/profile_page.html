@@ -30,11 +30,12 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
-        .form-group input[type="text"] {
-            width: 100%;
+        .form-group span {
+            display: block;
             padding: 5px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            margin-bottom: 5px;
         }
         .form-group input[type="submit"] {
             width: 100%;
@@ -58,15 +59,41 @@
     <form id="profileForm">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-             <img src="streaks.jpg" alt="Streaks" style="max-width: 100%; height: auto;">
-            <input type="text" id="streaksTextBox" name="streaks" placeholder="Enter streaks" style="margin-left: 5px;">
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Submit">
+            <span id="name"></span>
+            <label for="streaksTextBox">Streaks:</label>
+            <span id="streaksTextBox"></span>
         </div>
     </form>
 </div>
+
+<script>
+    window.onload = function() {
+    
+        let username;
+
+        fetch('CurrUser.txt')
+            .then(response => response.text())
+            .then(data => {
+                username = data.trim(); 
+                document.getElementById('name').textContent = username;
+                fetch('../users.json') 
+                    .then(response => response.json())
+                    .then(data => {
+                        const user = data.find(u => u.username === username); 
+                        if (user) {
+                            console.log("Running");
+                            console.log("Name:", user.username);
+                            console.log("Streaks:", user.streaks);
+                        } else {
+                            console.log("User not found in users.json");
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            })
+            .catch(error => console.error('Error:', error));
+
+    };
+</script>
 
 </body>
 </html>

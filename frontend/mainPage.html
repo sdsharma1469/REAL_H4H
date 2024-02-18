@@ -5,9 +5,11 @@
 </head>
 <body>
   <div class="button-wrapper">
-        <button class="button">
-    <img src="profile_logo.png" alt="Profile Logo" class="small-image">
-</button>
+    <a href="profile_page.html">
+    <button class="button">
+        <img src="profile_logo.png" alt="Profile Logo" class="small-image">
+    </button>
+</a>
 
     </div>
 <h1> <center>Farm Fast </center></h1>
@@ -17,6 +19,7 @@
 </div>
 <section>
   <center>
+
   <h2>Add Your Product</h2>
   <form id="productForm">
     <label for="productName">Product Name:</label>
@@ -35,9 +38,74 @@
     <input type="text" id="productContact" name="productContact" required>
 
     <button type="button" id="addProduct">Add Product</button>
+    
   </form>
+  <div id="searchBar">
+    <input type="text" id="searchInput" placeholder="Search products...">
+    <button type="button" id="searchButton">Search</button>
+</div>
+<div id="searchResults"></div>
 </center>
 </section>
+<script>
+
+document.getElementById('searchButton').addEventListener('click', function() {
+    event.preventDefault();
+    searchProducts();
+});
+
+function searchProducts() {
+    var searchInput = document.getElementById('searchInput').value;
+    fetch('http://127.0.0.1:5000/searchProduct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ food_name: searchInput })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text(); // Return response as text
+    })
+    .then(data => {
+        const jsonData = JSON.parse(data);
+        console.log(jsonData);
+        displaySearchResults(jsonData);
+    })
+}
+
+
+function displaySearchResults(data) {
+    var productListDiv = document.getElementById('productList');
+    productListDiv.innerHTML = '';
+
+    var productDiv = document.createElement('div');
+    productDiv.classList.add('product-item');
+    productDiv.style.fontFamily = 'Arial, sans-serif';
+    productDiv.style.padding = '10px';
+    productDiv.style.border = '1px solid #ccc';
+    productDiv.style.borderRadius = '5px';
+
+    var lines = data.split('\n');
+    lines.forEach(function(line) {
+        var lineElement = document.createElement('div');
+        lineElement.innerText = line;
+        productDiv.appendChild(lineElement);
+    });
+
+    productListDiv.appendChild(productDiv);
+}
+</script>
+<style>
+  .box {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 20px;
+  }
+  </style>
 
 <section>
   <h2>Products Available</h2>
@@ -45,6 +113,8 @@
     <!-- Products will be listed here -->
   </div>
 </section>
+
+
 
 <script>
 
@@ -98,7 +168,7 @@ function buyProduct(productId) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ productId: productId })
+        body: JSON.stringify({ productId: productId})
     })
     .then(response => {
         if (!response.ok) {
