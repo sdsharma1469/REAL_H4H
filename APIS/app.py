@@ -1,15 +1,12 @@
 from flask import Flask, jsonify, request
-import requests
 
-from functions import *
-from readJson import print_products, count_products
+
+from backend.functions import *
+from REAL_H4H.backend.readJson import print_products, count_products
+
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
-
-@app.route('/test', methods=['GET'])
-def hello_world():
-    return test()
 
 @app.route('/print', methods=['GET'])
 def printing():
