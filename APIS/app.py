@@ -3,12 +3,13 @@ from readJson import print_products, count_products, add_product
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins='*')
+CORS(app)
 
 
 @app.route('/print', methods=['GET'])
-def printing():
-    return print_products()
+def print_data():
+    products = print_products()
+    return jsonify(products)
 
 
 @app.route('/add', methods=['POST'])

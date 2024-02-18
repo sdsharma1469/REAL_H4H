@@ -36,6 +36,43 @@
 </section>
 
 <script>
+
+window.onload = function() {
+  console.log("Page loaded");
+
+  fetch('http://127.0.0.1:5000/print')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); 
+  })
+  .then(data => {
+    console.log(data); 
+    alert('GET request successful.'); 
+
+    var productListDiv = document.getElementById('productList');
+    data.forEach(function(item) {
+      var productDiv = document.createElement('div');
+      productDiv.classList.add('product-item');
+      productDiv.innerHTML = `
+        <div class="product-box">
+          <p><strong>Product Name:</strong> ${item.name}</p>
+          <p><strong>Price:</strong> ${item.price}</p>
+          <p><strong>Quantity:</strong> ${item.quantity}</p>
+          <p><strong>Contact:</strong> ${item.contact}</p>
+        </div>
+      `;
+      productListDiv.appendChild(productDiv);
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred.');
+  });
+};
+
+
 document.getElementById('addProduct').addEventListener('click', function() {
     var productName = document.getElementById('productName').value;
     var productPrice = document.getElementById('productPrice').value;

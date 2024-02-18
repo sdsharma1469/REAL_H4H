@@ -34,16 +34,20 @@ def count_products():
         count += 1
     return count
 
-
 def print_products():
     df = pd.read_json('APIS/listings.json')
+    products = []
     for index, row in df.iterrows():
-        print(f"ID: {row['id']}")
-        print(f"Product Name: {row['name']}")
-        print(f"Price: {row['price']}")
-        print(f"Quantity: {row['quantity']}")
-        print(f"Contact Number: {row['contact']}")
-    return df.to_string()
+        product = {
+            'id': row['id'],
+            'name': row['name'],
+            'price': row['price'],
+            'quantity': row['quantity'],
+            'contact': row['contact']
+        }
+        products.append(product)
+    return products
+
 
 
 def search_product():
