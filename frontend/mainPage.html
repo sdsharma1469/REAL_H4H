@@ -1,85 +1,107 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="mainPage.css">
-<title>Farm Fast</title>
+    <link rel="stylesheet" href="mainPage.css">
+    <title>Farm Fast</title>
+    <style>
+        /* ... existing styles ... */
+        .product {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .product div {
+            margin-bottom: 5px;
+        }
+        .product button {
+            width: auto;
+            padding: 5px 10px;
+            background-color: #5b8c5a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product button:hover {
+            background-color: #4a774c;
+        }
+    </style>
 </head>
 <body>
-<h1> <center>Farm Fast </center></h1>
+    <!-- Header with logo and title -->
+    <div class="header">
+        <img src="logo1.jpg" alt="Farm Fast Logo" class="tooltip" title="This is the Farm Fast logo">
+        <h1>Farm Fast</h1>
+    </div>
 
-<div class="header">
-  <img src="Logo.jpg" alt="Farm Fast Logo">
-</div>
-<section>
-  <h2>Add Your Product</h2>
-  <form id="productForm">
-    <label for="productName">Product Name:</label>
-    <input type="text" id="productName" name="productName" required>
+    <!-- Form to add new products -->
+    <section>
+        <h2>Add Your Product</h2>
+        <form id="productForm">
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="productName" required>
 
-    <label for="productPrice">Price:</label>
-    <input type="number" id="productPrice" name="productPrice" required>
+            <label for="productPrice">Price:</label>
+            <input type="number" id="productPrice" name="productPrice" required>
 
-    <label for="productQuantity">Quantity (in kg):</label>
-    <input type="number" id="productQuantity" name="productQuantity" required>
+            <label for="productQuantity">Quantity (in kg):</label>
+            <input type="number" id="productQuantity" name="productQuantity" required>
 
-    <button type="button" id="addProduct">Add Product</button>
-  </form>
-</section>
+            <button type="button" id="addProduct">Add Product</button>
+        </form>
+    </section>
 
-<section>
-  <h2>Products Available</h2>
-  <div id="productList">
-    <!-- Products will be listed here -->
-  </div>
-</section>
+    <!-- Section to list available products -->
+    <section>
+        <h2>Products Available</h2>
+        <div id="productList">
+            <!-- List of products will be dynamically added here -->
+        </div>
+    </section>
 
-<script>
-document.getElementById('addProduct').addEventListener('click', function() {
-  var productName = document.getElementById('productName').value;
-  var productPrice = document.getElementById('productPrice').value;
-  var productQuantity = document.getElementById('productQuantity').value;
+    <script>
+        document.getElementById('addProduct').addEventListener('click', function() {
+            var productName = document.getElementById('productName').value;
+            var productPrice = document.getElementById('productPrice').value;
+            var productQuantity = document.getElementById('productQuantity').value;
 
-  if (productName && productPrice && productQuantity) {
-    var productList = document.getElementById('productList');
+            if (productName && productPrice && productQuantity) {
+                var productList = document.getElementById('productList');
 
-    var productDiv = document.createElement('div');
-    productDiv.className = 'product';
+                var productDiv = document.createElement('div');
+                productDiv.className = 'product';
 
-    var productDetailsDiv = document.createElement('div');
-    productDetailsDiv.className = 'product-details';
+                var nameDiv = document.createElement('div');
+                nameDiv.textContent = 'Product Name: ' + productName;
 
-    var name = document.createElement('span');
-    name.textContent = productName + ' - ';
+                var priceDiv = document.createElement('div');
+                priceDiv.textContent = 'Price: ₹' + productPrice;
 
-    var price = document.createElement('span');
-    price.textContent = '₹' + productPrice + ' ';
+                var quantityDiv = document.createElement('div');
+                quantityDiv.textContent = 'Quantity: ' + productQuantity + ' kg';
 
-    var quantity = document.createElement('span');
-    quantity.textContent = productQuantity + 'kg';
+                var buyButton = document.createElement('button');
+                buyButton.textContent = 'Buy';
+                // Add functionality for the Buy button here, e.g., adding the product to a shopping cart
 
-    var addButton = document.createElement('button');
-    addButton.textContent = 'Add to Cart';
-    addButton.onclick = function() {
-      alert('Added ' + productName + ' to cart.');
-    };
+                productDiv.appendChild(nameDiv);
+                productDiv.appendChild(priceDiv);
+                productDiv.appendChild(quantityDiv);
+                productDiv.appendChild(buyButton);
 
-    productDetailsDiv.appendChild(name);
-    productDetailsDiv.appendChild(price);
-    productDetailsDiv.appendChild(quantity);
-    productDiv.appendChild(productDetailsDiv);
-    productDiv.appendChild(addButton);
+                productList.appendChild(productDiv);
 
-    productList.appendChild(productDiv);
-
-    // Clear the input fields
-    document.getElementById('productName').value = '';
-    document.getElementById('productPrice').value = '';
-    document.getElementById('productQuantity').value = '';
-  } else {
-    alert('Please fill out all fields.');
-  }
-});
-</script>
-
-
+                // Clear the input fields
+                document.getElementById('productName').value = ''; 
+                document.getElementById('productPrice').value = ''; 
+                document.getElementById('productQuantity').value = '';
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+    </script>
 </body>
 </html>
