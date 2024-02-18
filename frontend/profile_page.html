@@ -68,17 +68,15 @@
 
 <script>
     window.onload = function() {
-    
         let username;
-
-
         fetch('CurrUser.txt')
             .then(response => response.text())
             .then(data => {
                 username = data.trim(); 
+                console.log(username);
                 document.getElementById('name').textContent = username;
 
-                fetch('../users.json') 
+                fetch('http://127.0.0.1:5000/get_users') // Assuming your Flask app is running on localhost:5000
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Failed to fetch users.json');
@@ -91,13 +89,14 @@
                             console.log("Running");
                             console.log("Name:", user.username);
                             console.log("Streaks:", user.streaks);
+                            document.getElementById('streaksTextBox').textContent = `Streaks: ${user.streaks}`;
                         } else {
                             console.log("User not found in users.json");
                         }
                     })
                     .catch(error => console.error('Error:', error));
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Error fetching CurrUser.txt:', error));
 
     };
 </script>

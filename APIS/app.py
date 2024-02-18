@@ -17,6 +17,10 @@ app = Flask(__name__)
 
 CORS(app)
 
+json_file_path = 'APIS/users.json'
+app.secret_key = 'anisha'
+
+
 @app.route('/print', methods=['GET'])
 def print_data():
     products = print_products()
@@ -73,14 +77,16 @@ def signup():
 
     return jsonify({'message': 'User created successfully'}), 201
 
-json_file_path = 'APIS/users.json'
-app.secret_key = 'anisha'
 
 @app.route('/login', methods=['POST'])
 def login():
+    file = open('frontend/CurrUser.txt', 'w')
+    file.close()
+    
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
+    
 
     if not username or not password:
         return jsonify({'error': 'Username and password are required'}), 400
@@ -94,7 +100,8 @@ def login():
         return jsonify({'error': 'Invalid username or password'}), 401
 
     session['username'] = user['username']
-
+    
+    print("writing", username,"to the file")
     with open('frontend/CurrUser.txt', 'w') as file:
         file.write(username)
 
@@ -109,12 +116,23 @@ def search_food():
     return jsonify(results)
 
 
+@app.route('/get_users')
+def get_users():
+    try:
+        with open('APIS/users.json', 'r') as file:
+            users_data = json.load(file)
+        return jsonify(users_data)
+    except FileNotFoundError:
+        return jsonify(error='users.json not found'), 404
+    
+
+
 @app.route('/buy', methods=['POST'])
 def buy_product():
     data = request.json
     productId = data.get('productId')
 
-    with open('CurrUser.txt', 'r') as file:
+    with open('frontend/CurrUser.txt', 'r') as file:
         username = file.read().strip()
         print(username)
 
