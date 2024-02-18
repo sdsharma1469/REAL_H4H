@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 
 
 from backend.functions import *
-from REAL_H4H.backend.readJson import print_products, count_products
+from backend.readJson import print_products, count_products
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
