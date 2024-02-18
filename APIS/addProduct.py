@@ -1,6 +1,11 @@
 import pandas as pd
 import uuid
 
+import json
+import os
+import pandas as pd
+import uuid
+
 def add_product(name, farmer, price, quantity, contact):
     new_product = {
         "id": str(uuid.uuid4()),
@@ -11,11 +16,17 @@ def add_product(name, farmer, price, quantity, contact):
         "contact": str(contact)
     }
 
+    file_path = 'APIS/listings.json'
     try:
-        df = pd.read_json('APIS/listings.json')
+        with open(file_path, 'r') as file:
+            data = json.load(file)
     except FileNotFoundError:
-        df = pd.DataFrame(columns=["id","name","farmer", "price", "quantity", "contact"])
+        data = []
 
-    df = df._append(new_product, ignore_index=True)
+    data.append(new_product)
 
-    df.to_json('APIS/listings.json', orient='records')
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=4)
+
+
+    

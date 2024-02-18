@@ -62,49 +62,121 @@
 </head>
 <body>
 
-<div class="signup-container">
-    <img src="Logo.jpg" alt="Farm Fast Logo">
-    <h1>Farm Fast - Sign Up</h1>
-
-    <form class="signup-form" id="signupForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <button type="submit">Create Account</button>
-    </form>
-</div>
+    <div class="signup-container">
+        <img src="Logo.jpg" alt="Farm Fast Logo">
+        <h1>Farm Fast - Sign Up / Login</h1>
+    
+        <div id="signupOption">
+            <p>Not registered yet? Sign up here:</p>
+            <button onclick="showSignUpForm()">Sign Up</button>
+        </div>
+    
+        <div id="loginOption">
+            <p>Already have an account? Log in here:</p>
+            <button onclick="showLogInForm()">Log In</button>
+        </div>
+    
+        <form class="signup-form" id="signupForm" style="display: none;">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+    
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+    
+            <button type="submit">Create Account</button>
+        </form>
+    
+        <form class="login-form" id="loginForm" style="display: none;">
+            <label for="loginUsername">Username:</label>
+            <input type="text" id="loginUsername" name="loginUsername" required>
+    
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
+    
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    
+    <script>
+        function showSignUpForm() {
+            document.getElementById('signupOption').style.display = 'none';
+            document.getElementById('loginOption').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+        }
+    
+        function showLogInForm() {
+            document.getElementById('signupOption').style.display = 'none';
+            document.getElementById('loginOption').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        }
+    </script>
+    
 
 <script>
-    document.getElementById('signupForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
+ document.getElementById('signupForm').addEventListener('submit', function(event) {
+    event.preventDefault(); 
 
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
 
-        var data = {
-            username: username,
-            password: password
-        };
-        fetch('http://127.0.0.1:5000/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.text())
-        .then(data => {
-            console.log(data);
-            alert('POST request sent successfully.');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred.');
-        });
+    var data = {
+        username: username,
+        password: password
+    };
+
+    fetch('http://127.0.0.1:5000/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('User created successfully.');
+            window.location.href = 'mainPage.html'; // Redirect to mainPage.html
+        } else {
+            alert('Failed to create user. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred.');
     });
+});
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); 
+
+    var username = document.getElementById('loginUsername').value;
+    var password = document.getElementById('loginPassword').value;
+
+    var data = {
+        username: username,
+        password: password
+    };
+
+    fetch('http://127.0.0.1:5000/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Login successful.');
+            window.location.href = 'mainPage.html'; // Redirect to mainPage.html
+        } else {
+            alert('Login failed. Please check your username and password.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred.');
+    });
+});
+
 </script>
 
 </body>

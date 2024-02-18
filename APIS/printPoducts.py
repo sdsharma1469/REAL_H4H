@@ -1,16 +1,15 @@
 import pandas as pd
-
 def print_products():
     df = pd.read_json('APIS/listings.json')
     products = []
-    for index, row in df.iterrows():
+    for row in df.iterrows():
         product = {
-            'id': row['id'],
-            'farmer' : row['farmer'],
-            'name': row['name'],
-            'price': row['price'],
-            'quantity': row['quantity'],
-            'contact': row['contact']
+            'id': row[1]['id'],
+            'farmer': row[1]['farmer'],
+            'name': row[1]['name'],
+            'price': row[1]['price'],
+            'quantity': row[1]['quantity'],
+            'contact': row[1]['contact']
         }
         products.append(product)
     return products

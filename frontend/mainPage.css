@@ -140,3 +140,46 @@ body {
 .product-box {
   margin: 20px; /* Add margin to separate boxes */
 }
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set height to 100% of the viewport height */
+}
+
+#FarmerName {
+  width: 200px; /* Set width as needed */
+  padding: 10px;
+}
+
+#productName {
+  width: 200px;
+  padding: 10px;
+}
+
+#productPrice {
+  width:200px;
+  padding:10px;
+}
+
+#productQuantity {
+  width:200px;
+  padding:10px;
+}
+
+#productContact {
+  width:200px;
+  padding:10px;
+}
+
+.button-wrapper {
+    position: fixed; /* or absolute depending on your layout needs */
+    top: 20px; /* Adjust this value as needed */
+    right: 20px; /* Adjust this value as needed */
+}
+
+.button img {
+    width: 50px;
+    height: 50px;
+}

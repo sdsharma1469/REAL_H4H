@@ -4,18 +4,25 @@
 <title>Farm Fast</title>
 </head>
 <body>
+  <div class="button-wrapper">
+        <button class="button">
+    <img src="profile_logo.png" alt="Profile Logo" class="small-image">
+</button>
+
+    </div>
 <h1> <center>Farm Fast </center></h1>
 
 <div class="header">
   <img src="Logo.jpg" alt="Farm Fast Logo">
 </div>
 <section>
+  <center>
   <h2>Add Your Product</h2>
   <form id="productForm">
     <label for="productName">Product Name:</label>
     <input type="text" id="productName" name="productName" required>
 
-    <label for="FarmerName">FarmerName:</label>
+    <label for="FarmerName">Farmer Name:</label>
     <input type="text" id="FarmerName" name="FarmerName" required>
 
     <label for="productPrice">Price:</label>
@@ -29,6 +36,7 @@
 
     <button type="button" id="addProduct">Add Product</button>
   </form>
+</center>
 </section>
 
 <section>
@@ -60,6 +68,7 @@ window.onload = function() {
       productDiv.classList.add('product-item');
       productDiv.innerHTML = `
       <div class="box product-box">
+
           <table border="0" cellspacing="0" cellpadding="10">
               <tr>
                   <td>
@@ -68,6 +77,7 @@ window.onload = function() {
                       <p><strong>Price:</strong> ${item.price}</p>
                       <p><strong>Quantity:</strong> ${item.quantity}</p>
                       <p><strong>Contact:</strong> ${item.contact}</p>
+                      <button class="buy-button" onclick="buyProduct('${item.id}')">Buy</button>
                   </td>
               </tr>
           </table>
@@ -82,6 +92,9 @@ window.onload = function() {
   });
 };
 
+function buyProduct(productId) {
+    alert('Product with ID ' + productId + ' has been bought!');
+}
 
 document.getElementById('addProduct').addEventListener('click', function() {
     var productName = document.getElementById('productName').value;
@@ -116,6 +129,5 @@ document.getElementById('addProduct').addEventListener('click', function() {
 });
 
 </script>
-
 </body>
 </html>
