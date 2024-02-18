@@ -93,7 +93,27 @@ window.onload = function() {
 };
 
 function buyProduct(productId) {
-    alert('Product with ID ' + productId + ' has been bought!');
+    fetch('http://127.0.0.1:5000/buy', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productId: productId })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); 
+    })
+    .then(data => {
+        console.log(data); 
+        alert('Product with ID ' + productId + ' has been bought!');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred.');
+    });
 }
 
 document.getElementById('addProduct').addEventListener('click', function() {
