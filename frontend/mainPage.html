@@ -56,11 +56,17 @@ window.onload = function() {
       var productDiv = document.createElement('div');
       productDiv.classList.add('product-item');
       productDiv.innerHTML = `
-        <div class="product-box">
-          <p><strong>Product Name:</strong> ${item.name}</p>
-          <p><strong>Price:</strong> ${item.price}</p>
-          <p><strong>Quantity:</strong> ${item.quantity}</p>
-          <p><strong>Contact:</strong> ${item.contact}</p>
+        <div class="box product-box">
+          <table border="1" cellspacing="0" cellpadding="10">
+              <tr>
+                  <td>
+                      <p><strong>Product Name:</strong> ${item.name}</p>
+                      <p><strong>Price:</strong> ${item.price}</p>
+                      <p><strong>Quantity:</strong> ${item.quantity}</p>
+                      <p><strong>Contact:</strong> ${item.contact}</p>
+                  </td>
+              </tr>
+          </table>
         </div>
       `;
       productListDiv.appendChild(productDiv);

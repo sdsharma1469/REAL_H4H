@@ -1,6 +1,12 @@
 from flask import Flask, jsonify, request
-from APIS.searchProduct import print_products, count_products, add_product
 from flask_cors import CORS
+from searchProduct import *
+from addProduct import * 
+from countProducts import *
+from getFarmer import *
+from printPoducts import *
+from removeProduct import *
+
 
 app = Flask(__name__)
 CORS(app)

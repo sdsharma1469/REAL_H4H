@@ -6,7 +6,6 @@ def print_products():
     for index, row in df.iterrows():
         product = {
             'id': row['id'],
-            'farmer': row['farmer'],
             'name': row['name'],
             'price': row['price'],
             'quantity': row['quantity'],
