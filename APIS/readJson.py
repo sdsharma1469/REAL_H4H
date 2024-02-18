@@ -1,11 +1,7 @@
 import pandas as pd
 import uuid
 
-def add_product():
-    name = input("Enter product name: ")
-    price = float(input("Enter product price: "))
-    quantity = int(input("Enter product quantity: "))
-    contact = int(input("Enter contact information: "))
+def add_product(name, price, quantity, contact):
 
     new_product = {
         "id": str(uuid.uuid4()),
@@ -17,7 +13,7 @@ def add_product():
 
     df = pd.read_json('listings.json')
 
-    df = df.append(new_product, ignore_index=True)
+    df = df._append(new_product, ignore_index=True)
 
     df.to_json('listings.json', orient='records')
 
@@ -48,4 +44,5 @@ def print_products():
 
 def search_product():
     product_name = input("Enter the name of the product to remove: ")
-
+    matching_products = df[df['name'] == product_name]
+    return matching_products
